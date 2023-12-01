@@ -62,3 +62,19 @@ tr:hover {
 .violeta {
   background-color: #3e1656;
 }
+
+    body {
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #f8f9fa;
+    }
+
+    #miGraficoContainer {
+      width: 50%;
+      height: 50vh; /* Ajusta la altura según tus necesidades */
+      margin-top: 20px; /* Ajusta el margen superior según tus necesidades */
+    }
+

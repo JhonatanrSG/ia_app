@@ -1,11 +1,10 @@
 import pyodbc
-import pandas as pd
-from django.db import connection
-from .models import DatabaseConfiguration
+import requests
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
+from .models import DatabaseConfiguration
 
 def login_view(request):
     if request.method == 'POST':
@@ -21,13 +20,17 @@ def login_view(request):
 
     return render(request, 'loginHT.html')
 
-@login_required(login_url='login')  # Redirige a la página de inicio de sesión si el usuario no está autenticado
+@login_required(login_url='login')
 def home(request):
     return render(request, 'home.html')
 
 def get_database_config():
     # Supongamos que solo hay una configuración de base de datos activa
     return DatabaseConfiguration.objects.first()
+
+import pyodbc
+from django.http import JsonResponse
+from .models import DatabaseConfiguration
 
 def execute_sql(request):
     if request.method == 'POST':
@@ -45,11 +48,21 @@ def execute_sql(request):
                                 ) as conexion:
                 print("Conexión a la base de datos exitosa.")
                 cursor = conexion.cursor()
-                cursor.execute(sql_query)  # Ejecutar la consulta proporcionada por el usuario
-                resultado = cursor.fetchall()
-                print(resultado)
 
-                return JsonResponse({'success': 'Consulta exitosa', 'table_data': resultado})
+                # Agrega este print para registrar la consulta SQL antes de ejecutarla
+                print("Consulta SQL a ejecutar:", sql_query)
+
+                # Validar que la consulta SQL no esté vacía antes de ejecutarla
+                if sql_query:
+                    # Ejecutar la consulta SQL
+                    cursor.execute(sql_query)
+                    columnas = [col[0] for col in cursor.description]
+                    data = [dict(zip(columnas, row)) for row in cursor.fetchall()]
+
+                    return JsonResponse({'data': data[0]})
+                else:
+                    return JsonResponse({'error': 'La consulta SQL está vacía.'})
+
         except Exception as e:
             print(f"Error de conexión: {str(e)}")
             return JsonResponse({'error': f'Error de conexión: {str(e)}'})
