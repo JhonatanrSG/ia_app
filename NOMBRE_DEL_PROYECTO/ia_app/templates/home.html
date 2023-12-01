@@ -1,61 +1,68 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Consulta y Reporte</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" />
-  <link rel="stylesheet" href="{% static 'css/home/home_styles.css' %}" />
-</head>
-<body class="bg-opacity-10 bg-light">
-  <header class="violeta text-white py-3">
-    <div class="container">
-      <div class="row align-items-center">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Consulta y Reporte</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap"
+    />
+    <link rel="stylesheet" href="{% static 'css/home/home_styles.css' %}" />
+  </head>
+  <body class="bg-opacity-10 bg-light">
+    <header class="violeta text-white py-3 container-fluid">
+      <div class="container-fluid">
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <h1 class="h3 mb-0">Consulta y Reporte SQL</h1>
+          </div>
+          <div class="col-md-6 text-end">
+            <button class="btn btn-light" type="button" id="toggleDarkMode">
+              Modo Oscuro
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="container mt-4">
+      <div class="row">
         <div class="col-md-6">
-          <h1 class="h3 mb-0">Consulta y Reporte SQL</h1>
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Haz tu consulta SQL"
+              aria-label="Consulta SQL"
+              aria-describedby="button-addon1"
+              id="sqlQueryInput"
+            />
+            <button class="btn btn-primary" type="button" id="button-addon1">
+              Consultar
+            </button>
+          </div>
+        </div>       
+      </div>
+      <h2>Aqui estan los datos</h2>
+        <div class="col-md-6" id="datos"></div>
+      <div class="row">        
+        <div class="col-md-6" id="miGraficoContainer">
+          <canvas id="miGrafico">aqui va el grafico</canvas>
         </div>
-        <div class="col-md-6 text-end">
-          <button class="btn btn-light" type="button" id="toggleDarkMode">
-            Modo Oscuro
-          </button>
+        <div class="col-md-6">
+          <h2 class="input-group mb-3">Aqui va la sentencia SQL</h2>
         </div>
       </div>
     </div>
-  </header>
-
-  <div class="container mt-4">
-    <div class="row">
-      <div class="col-md-6">
-        <div class="input-group mb-3">
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Haz tu consulta SQL"
-            aria-label="Consulta SQL"
-            aria-describedby="button-addon1"
-            id="sqlQueryInput"
-          />
-          <button class="btn btn-primary" type="button" id="button-addon1">
-            Consultar
-          </button>
-        </div>
-      </div>
-    </div>
-    <div id="datos">Aqui estan los datos</div>
-    <div id="miGraficoContainer">
-      <canvas id="miGrafico">aqui va el grafico</canvas>
-    </div>
-  </div>
-
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.2/js/bootstrap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="{% static 'js/home/home_script.js' %}"></script>
-</body>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{% static 'js/home/home_script.js' %}"></script>
+  </body>
 </html>
-
-
-
-
